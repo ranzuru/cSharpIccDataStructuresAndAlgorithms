@@ -1,6 +1,6 @@
-﻿using cSharpIccDataStructuresAndAlgorithms;
-using cSharpIccDataStructuresAndAlgorithms.linked_list;
+﻿using cSharpIccDataStructuresAndAlgorithms.linked_list;
 using cSharpIccDataStructuresAndAlgorithms.stack_and_queues;
+using cSharpIccDataStructuresAndAlgorithms.trees;
 
 class Program
 {
@@ -14,7 +14,12 @@ class Program
         //LinkedListNode.Main();
 
         // STACKS AND QUEUES
-        StackClass.Main();
+        //StackClass.Main();
         //QueueClass.Main();
+
+        // TREE
+        //BSTClass.Main();
+        RedBlackTree.Main();
+        //AVL.Main();
     }
 }

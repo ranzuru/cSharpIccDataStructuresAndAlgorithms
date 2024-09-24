@@ -14,16 +14,16 @@ namespace cSharpIccDataStructuresAndAlgorithms.stack_and_queues
             Person person2 = new Person(2, "Jesse James");
             Person person3 = new Person(3, "Sundance Kid");
 
-            // FILO - First In, First Out
+            // LIFO - Last In, First Out 
             Stack<Person> queue = new Stack<Person>();
 
             Console.WriteLine("Count: " + queue.Count + "\n");
 
             Console.WriteLine("Performed Push");
             queue.Push(person1); // stack: person1
-            queue.Push(person2); // stack: person1, person2
-            queue.Push(person3); // stack: person1, person2, person3
-            queue.Push(person1); // stack: person1, person2, person3, person1
+            queue.Push(person2); // stack: person2, person1 (top to bottom)
+            queue.Push(person3); // stack: person3, person2, person1
+            queue.Push(person1); // stack: person1, person3, person2, person1
 
             foreach (var person in queue)
             {
@@ -32,7 +32,7 @@ namespace cSharpIccDataStructuresAndAlgorithms.stack_and_queues
             Console.WriteLine("Count: " + queue.Count + "\n");
 
             Console.WriteLine("Performed Pop");
-            queue.Pop(); // stack: person2, person3, person1
+            queue.Pop(); // stack: person3, person2, person1
             foreach (var person in queue)
             {
                 Console.WriteLine("[" + person.id + "] " + person.name);

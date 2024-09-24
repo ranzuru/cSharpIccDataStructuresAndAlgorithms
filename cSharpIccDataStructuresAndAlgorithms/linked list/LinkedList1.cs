@@ -11,7 +11,7 @@ namespace cSharpIccDataStructuresAndAlgorithms.linked_list
         public static void Main()
         {
             // singly linked list
-            // should add/ remove nodes manually (making method)
+            // add/ remove nodes manually (making method)
             Node nodeA = new Node(6);
             Node nodeB = new Node(3);
             Node nodeC = new Node(4);

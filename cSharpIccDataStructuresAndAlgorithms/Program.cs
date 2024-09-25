@@ -1,4 +1,5 @@
-﻿using cSharpIccDataStructuresAndAlgorithms.linked_list;
+﻿using cSharpIccDataStructuresAndAlgorithms;
+using cSharpIccDataStructuresAndAlgorithms.linked_list;
 using cSharpIccDataStructuresAndAlgorithms.stack_and_queues;
 using cSharpIccDataStructuresAndAlgorithms.trees;
 

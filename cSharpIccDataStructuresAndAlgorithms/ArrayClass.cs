@@ -8,52 +8,154 @@ namespace cSharpIccDataStructuresAndAlgorithms
 {
     class ArrayClass
     {
+        static Device[] devices = new Device[5];
+        static int deviceCount = 0;
+
         public static void Main()
         {
-            Device device1 = new Device("Root", "Computer", "Military");
-            Device device2 = new Device("Samaritan", "Mobile", "Military");
+            bool loop = true;
+            while (loop)
+            {
+                Console.WriteLine("\nDevice Management System");
+                Console.WriteLine("[1] Insert");
+                Console.WriteLine("[2] Search");
+                Console.WriteLine("[3] Delete");
+                Console.WriteLine("[4] View");
+                Console.WriteLine("[0] Exit");
+                Console.Write("Option: ");
 
-            device1.introduction();
-            device2.introduction();
+                string option = Console.ReadLine();
 
-            Owner owner1 = new Owner("Harold Finch");
-            Owner owner2 = new Owner("John Greer");
+                switch (option)
+                {
+                    case "1":
+                        insetDeviceEntry();
+                        break;
+                    case "2":
+                        searchDeviceEntry();
+                        break;
+                    case "3":
+                        deleteDeviceEntry();
+                        break;
+                    case "4":
+                        displayDevice();
+                        break;
+                    case "0":
+                        loop = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+            }
+        }
 
-            owner1.ownedDevice = device1; // sets the ownedDevice Attribute (from owner class) to device1
-            owner2.ownedDevice = device2;
+        static void insetDeviceEntry()
+        {
+            Console.WriteLine("\nDevice Information Entry");
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+            Console.Write("Type: ");
+            string type = Console.ReadLine();
+            Console.Write("Grade: ");
+            string grade = Console.ReadLine();
 
-            owner1.ownedDevice.introduction();
-            owner2.ownedDevice.introduction(); // shows the device2 since it is owned by owner2s
+            Device device = new Device(name, type, grade);
+            insertDeviceArray(device);
+        }
+        static void insertDeviceArray(Device device)
+        {
+            Console.WriteLine("\nInserted Device Information");
+            if (deviceCount < devices.Length)
+            {
+                devices[deviceCount] = device;
+                deviceCount++;
+                
+                Console.WriteLine("Name: " + device.name);
+            }
+            else Console.WriteLine("\nArray Full");
+        }
+
+        static void displayDevice()
+        {
+            Console.WriteLine("\nDevice Information List");
+            for (int i = 0; i < deviceCount; i++)
+            {
+                devices[i].deviceFullDetails();
+            }
+        }
+        static void searchDeviceEntry()
+        {
+            Console.WriteLine("\nDevice Search Entry");
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+            Device foundDevice = searchDeviceArray(name);
+
+            if (foundDevice != null)
+            {
+                Console.WriteLine("\nDevice Information");
+                foundDevice.deviceFullDetails();
+            }
+            else Console.WriteLine("Not Found.");
+        }
+        static Device searchDeviceArray(string name)
+        {
+            for (int i = 0; i < deviceCount; i++)
+            {
+                if (devices[i].name.Equals(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    return devices[i];
+                }
+            }
+            return null;
+        }
+
+        static void deleteDeviceEntry()
+        {
+            Console.WriteLine("\nDevice Deletion Entry");
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+            deleteDeviceArray(name);
+        }
+        static void deleteDeviceArray(string name)
+        {
+            for (int i = 0; i < deviceCount; i++)
+            {
+                if (devices[i].name.Equals(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    for (int j = i; j < deviceCount - 1; j++)
+                    {
+                        devices[j] = devices[j + 1];
+                    }
+                    devices[deviceCount - 1] = null;
+                    deviceCount--;
+                    Console.WriteLine("\nDeleted Device");
+                    Console.WriteLine("Name: " + name);
+                    return;
+                }
+            }
+            Console.WriteLine("Not Found.");
         }
     }
 
     class Device
     {
-        public string name {  get; set; }
+        public string name { get; set; }
         public string type { get; set; }
         public string grade { get; set; }
+
         public Device(string name, string type, string grade)
         {
             this.name = name;
             this.type = type;
             this.grade = grade;
         }
-        public void introduction()
-        {
-            Console.WriteLine("Device Information");
-            Console.WriteLine("Name : " + name);
-            Console.WriteLine("Type : " + type);
-            Console.WriteLine("Grade: " + grade + "\n");
-        }
-    }
 
-    class Owner
-    {
-        public string name { get; set; }
-        public Device ownedDevice;
-        public Owner(string name)
+        public void deviceFullDetails()
         {
-            this.name = name;
+            Console.WriteLine("\nName : " + name);
+            Console.WriteLine("Type : " + type);
+            Console.WriteLine("Grade: " + grade);
         }
     }
 }

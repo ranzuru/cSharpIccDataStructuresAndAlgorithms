@@ -1,4 +1,6 @@
 ﻿using cSharpIccDataStructuresAndAlgorithms;
+using cSharpIccDataStructuresAndAlgorithms.graph;
+using cSharpIccDataStructuresAndAlgorithms.hashing;
 using cSharpIccDataStructuresAndAlgorithms.linked_list;
 using cSharpIccDataStructuresAndAlgorithms.stack_and_queues;
 using cSharpIccDataStructuresAndAlgorithms.trees;
@@ -20,7 +22,9 @@ class Program
 
         // TREE
         //BSTClass.Main();
-        RedBlackTree.Main();
-        //AVL.Main();
+        //RedBlackTree.Main();
+
+        //undirectedGraph.Main();
+        doubleHashing.Main();
     }
 }

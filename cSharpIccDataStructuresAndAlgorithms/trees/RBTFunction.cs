@@ -21,36 +21,40 @@ namespace cSharpIccDataStructuresAndAlgorithms.trees
                 root = newItem;
                 root.color = ColorSelection.Black;
                 return;
-            }
+            }   // sets the root if it does not exist yet
 
-            RBTNode Y = null;
+            RBTNode Y = null;   // parent
             RBTNode X = root;
 
             while (X != null)
             {
                 Y = X;
+                // traversal direction of the current node (x.data)
                 if (newItem.data < X.data) X = X.left;
                 else X = X.right;
-            }
+            } // loop to reach the leaf node
 
-            newItem.parent = Y;
-            if (Y == null) root = newItem;
+            newItem.parent = Y; // set the new node's parent
+            if (Y == null) root = newItem;  // sets the root if it does not exist yet
+            // set new node as left/ right child of y
             else if (newItem.data < Y.data) Y.left = newItem;
             else Y.right = newItem;
 
-            newItem.left = null;
+            newItem.left = null;    // new node does not have child (left/ right)
             newItem.right = null;
-            newItem.color = ColorSelection.Red;
+            newItem.color = ColorSelection.Red; // set color red on the new node
             InsertionFix(newItem);
         }
+        // fix violation/s after insertion
         private void InsertionFix(RBTNode item)
         {
             while (item != root && item.parent.color == ColorSelection.Red)
             {
                 if (item.parent == item.parent.parent.left)
                 {
-                    RBTNode Y = item.parent.parent.right;
+                    RBTNode Y = item.parent.parent.right; // grandparent
 
+                    // recoloring parent and sibling (both red)
                     if (Y != null && Y.color == ColorSelection.Red)
                     {
                         item.parent.color = ColorSelection.Black;
@@ -60,14 +64,16 @@ namespace cSharpIccDataStructuresAndAlgorithms.trees
                     }
                     else
                     {
+                        // if parent sibling is black or null, left rotation (parent)
                         if (item == item.parent.right)
                         {
                             item = item.parent;
                             LeftRotation(item);
                         }
+                        // recolor
                         item.parent.color = ColorSelection.Black;
                         item.parent.parent.color = ColorSelection.Red;
-                        RightRotation(item.parent.parent);
+                        RightRotation(item.parent.parent);  // right rotation (grandparent)
                     }
                 }
                 else
@@ -94,7 +100,7 @@ namespace cSharpIccDataStructuresAndAlgorithms.trees
                         LeftRotation(item.parent.parent);
                     }
                 }
-                root.color = ColorSelection.Black;
+                root.color = ColorSelection.Black;  // ensure root is black
             }
         }
         // DELETION AND FIX =====================================================
@@ -126,7 +132,7 @@ namespace cSharpIccDataStructuresAndAlgorithms.trees
 
             if (Y.color == ColorSelection.Black) DeletionFix(X);
         }
-
+        // fix violation/s after deletion
         private void DeletionFix(RBTNode X)
         {
             while (X != null && X != root && X.color == ColorSelection.Black)
@@ -194,6 +200,55 @@ namespace cSharpIccDataStructuresAndAlgorithms.trees
             }
             if (X != null) X.color = ColorSelection.Black;
         }
+        // for deletion
+        public RBTNode Find(int key)
+        {
+            bool isFound = false;
+            RBTNode temp = root;
+            RBTNode item = null;
+
+            while (!isFound)
+            {
+                if (temp == null) break;
+
+                if (key < temp.data) temp = temp.left;
+
+                if (key > temp.data) temp = temp.right;
+
+                if (key == temp.data)
+                {
+                    isFound = true;
+                    item = temp;
+                }
+            }
+
+            if (isFound)
+            {
+                Console.WriteLine("{0} was found", key);
+                return temp;
+            }
+            else
+            {
+                Console.WriteLine("{0} not found", key);
+                return null;
+            }
+        }
+        private RBTNode TreeSuccessor(RBTNode X)
+        {
+            if (X.left != null) return Minimum(X);  // sucessor is the minimum value on the left subtree
+            else
+            {
+                RBTNode Y = X.parent;   // sets y as x's parent
+                // y !null = havent reached the root, x is the right child of y (continue moving up the tree)
+                while (Y != null && X == Y.right)
+                {
+                    X = Y;
+                    Y = Y.parent;   // sets y to be the parent of the new y (x)
+                    // moves up the tree to search for a not right child (potential sucessor)
+                }
+                return Y;
+            }
+        }
         // ROTATIONS ========================================================
         private void LeftRotation(RBTNode X)
         {
@@ -254,58 +309,12 @@ namespace cSharpIccDataStructuresAndAlgorithms.trees
                 InOrderDisplay(current.right);
             }
         }
-
-        public RBTNode Find(int key)
-        {
-            bool isFound = false;
-            RBTNode temp = root;
-            RBTNode item = null;
-
-            while (!isFound)
-            {
-                if (temp == null) break;
-
-                if (key < temp.data) temp = temp.left;
-
-                if (key > temp.data) temp = temp.right;
-
-                if (key == temp.data)
-                {
-                    isFound = true;
-                    item = temp;
-                }
-            }
-            
-            if (isFound)
-            {
-                Console.WriteLine("{0} was found", key);
-                return temp;
-            }
-            else
-            {
-                Console.WriteLine("{0} not found", key);
-                return null;
-            }
-        }
+        
         private RBTNode Minimum(RBTNode X)
         {
             while (X.left.left != null) X = X.left;
             if (X.left.right != null) X = X.left.right;
             return X;
-        }
-        private RBTNode TreeSuccessor(RBTNode X)
-        {
-            if (X.left != null) return Minimum(X);
-            else
-            {
-                RBTNode Y = X.parent;
-                while (Y != null && X == Y.right)
-                {
-                    X = Y;
-                    Y = Y.parent;
-                }
-                return Y;
-            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace cSharpIccDataStructuresAndAlgorithms.hashing
         {
             Hashtable hashTbl = new Hashtable();
 
-            Console.WriteLine("Double Hashing with Key Converter (ASCII):");
+            Console.WriteLine("Double Hashing with Key Converter (ASCII)");
 
             Console.Write("\nIndex/es: ");
             int indexStorage = Convert.ToInt32(Console.ReadLine());
@@ -22,7 +22,8 @@ namespace cSharpIccDataStructuresAndAlgorithms.hashing
             Console.WriteLine("\nNote: String of characters is preferred on the key input. ");
             for (indexStorage = 0; indexStorage < hashArray.Length; indexStorage++)
             {
-                Console.WriteLine("\nEntry " + (indexStorage + 1));
+                Console.WriteLine("\n==============================================");
+                Console.WriteLine("Entry " + (indexStorage + 1));
                 Console.Write("Key  : ");
                 string key = Console.ReadLine();
                 Console.Write("Value: ");

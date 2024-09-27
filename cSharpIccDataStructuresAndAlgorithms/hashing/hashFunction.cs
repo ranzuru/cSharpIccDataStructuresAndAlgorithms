@@ -52,27 +52,27 @@ namespace cSharpIccDataStructuresAndAlgorithms.hashing
 
             for (int i = 0; i < array.Length; i++)
             {
+                // calculate new index for hash collision resolution
+                newIndex = (primaryIndex + i * stepSize) % array.Length;
+
                 if (array[newIndex] == null)
                 {
                     array[newIndex] = value;    // calculated index
                     Console.WriteLine("\nStored");
-                    Console.WriteLine("Value: " + value);
                     Console.WriteLine("Index: " + newIndex);
+                    Console.WriteLine("Value: " + value);
                     return;
                 } 
-                else
+   
+                if (primaryIndex == newIndex)
                 {
                     Console.WriteLine("\nHash Collision");
+                    Console.WriteLine("Entry Index   : " + newIndex);
                     Console.WriteLine("Existing Index: " + key);
-                    Console.WriteLine("New Index     : " + newIndex);
-                    collision = true;
-                }
-
-                // calculate new index for hash collision resolution
-                newIndex = (primaryIndex + i * stepSize) % array.Length;
+                } else Console.WriteLine("\nChecking Index: " + newIndex);
             }
 
-            Console.WriteLine("Array Full");
+            Console.WriteLine("\nArray Full/ No Suitable Index Slot");
         }
     }
 }

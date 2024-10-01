@@ -3,6 +3,7 @@ using cSharpIccDataStructuresAndAlgorithms.graph;
 using cSharpIccDataStructuresAndAlgorithms.hashing;
 using cSharpIccDataStructuresAndAlgorithms.heaps;
 using cSharpIccDataStructuresAndAlgorithms.linked_list;
+using cSharpIccDataStructuresAndAlgorithms.searching_algorithms;
 using cSharpIccDataStructuresAndAlgorithms.sorting_algorithms;
 using cSharpIccDataStructuresAndAlgorithms.stack_and_queues;
 using cSharpIccDataStructuresAndAlgorithms.trees;
@@ -13,8 +14,7 @@ class Program
 {
     public static void Main(string[] args)
     {
-        //quicksort.Main();
-
+        greedyAlgoClass.Main();
 
         bool loop = false;  // off
         while (loop)
@@ -89,6 +89,31 @@ class Program
                         break;
                     case 8:
                         heapClass.Main();
+                        break;
+                    // SORTING
+                    case 9.1:
+                        quickSortClass.Main();
+                        break;
+                    case 9.2:
+                        selectionSortClass.Main();
+                        break;
+                    case 9.3:
+                        bubbleSortClass.Main();
+                        break;
+                    case 9.4:
+                        insertionSortClass.Main();
+                        break;
+                    case 9.5:
+                        mergeSortClass.Main();
+                        break;
+                    // SEARCHING
+                    case 10.1:
+                        binarySearchClass.Main();
+                        break;
+                    case 10.2:
+                        linearSearchClass.Main();
+
+
                         break;
                     case 0:
                         loop = false;

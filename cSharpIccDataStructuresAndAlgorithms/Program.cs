@@ -7,6 +7,7 @@ using cSharpIccDataStructuresAndAlgorithms.searching_algorithms;
 using cSharpIccDataStructuresAndAlgorithms.sorting_algorithms;
 using cSharpIccDataStructuresAndAlgorithms.stack_and_queues;
 using cSharpIccDataStructuresAndAlgorithms.trees;
+using System.Data;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -14,9 +15,7 @@ class Program
 {
     public static void Main(string[] args)
     {
-        greedyAlgoClass.Main();
-
-        bool loop = false;  // off
+        bool loop = true;
         while (loop)
         {
             Console.WriteLine("C# DATA STRUCTURES AND ALGORITHMS");
@@ -42,7 +41,6 @@ class Program
             Console.WriteLine("[11] Greedy Algorithms");
             Console.WriteLine("[12] Divide and Conquer");
             Console.WriteLine("[13] Backtracking");
-            Console.WriteLine("[14] Space and Time Complexity Analysis");
             Console.WriteLine("[0] Exit");
 
             Console.Write("\nSelect a Lesson: ");
@@ -112,8 +110,16 @@ class Program
                         break;
                     case 10.2:
                         linearSearchClass.Main();
+                        break;
 
-
+                    case 11:
+                        greedyAlgoClass.Main();
+                        break;
+                    case 12:
+                        divideAndConquerClass.Main();
+                        break;
+                    case 13:
+                        backtrackingClass.Main();
                         break;
                     case 0:
                         loop = false;
@@ -133,7 +139,6 @@ class Program
             {
                 Console.WriteLine("\n\nPress Enter to return to the menu...");
                 Console.ReadLine();
-                Console.Clear();
             }
         }
     }
